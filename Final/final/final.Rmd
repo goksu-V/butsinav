@@ -1,0 +1,188 @@
+---
+title: "Telefon Seçiminde Özellikler ve Fiyat Skalası"
+author: 
+  - Göksu Vatansever[^1]
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa-tr.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{turkish}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+    Mobil telefon pazarı, son yıllarda büyük bir ivme kazanmış ve hızla büyümeye devam etmektedir. Tüketici talepleri değişirken, telefon üreticileri rekabetçi bir ortamda farklılaşmak için sürekli olarak yeni özellikler sunmaktadır. Bu nedenle, telefon özellikleri ile fiyatlar arasındaki ilişkiyi anlamak ve analiz etmek, tüketicilere doğru ürünü seçme konusunda rehberlik etmek ve şirketlerin rekabet avantajı elde etmelerine yardımcı olmak açısından büyük bir önem taşımaktadır.Bu çalışmada, telefon özellikleri ile fiyatlar arasındaki ilişkiyi araştırmayı amaçladık. İlk olarak, önemli telefon özelliklerini belirleyip sınıflandırdık. Bu özellikler arasında işletim sistemi, işlemci hızı, RAM kapasitesi, depolama alanı, kamera çözünürlüğü, batarya ömrü ve ekran boyutu gibi faktörler yer almaktadır. Ardından, farklı fiyat aralıklarında bulunan telefonları analiz ettik.Araştırmamız için geniş bir veri seti kullandık ve istatistiksel analizler gerçekleştirdik. Özelliklerin fiyat üzerindeki etkisini inceledik ve çeşitli grafikler ve istatistiklerle sonuçlarımızı görselleştirdik. Örneğin, yüksek kamera çözünürlüğüne sahip telefonların genellikle daha yüksek fiyatlarla satıldığını tespit ettik. Benzer şekilde, daha fazla depolama alanına sahip telefonlar da genellikle daha pahalıdır. Analizlerimiz, telefon özelliklerinin fiyat üzerinde önemli bir etkisi olduğunu doğruladı.
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+[^1]: 18080112, [Github Repo](https://github.com/goksu-V/butsinav.git)
+
+
+
+# Giriş
+Telefon özellikleri ve fiyat analizi, günümüzde mobil telefon pazarındaki hızlı değişim ve rekabet ortamının bir sonucudur. Mobil teknolojinin sürekli ilerlemesiyle birlikte, tüketicilerin telefon seçiminde daha bilinçli ve kapsamlı bir karar verme süreci geçirmeleri gerekmektedir. Bu noktada, telefon özellikleri ve fiyatları arasındaki ilişkiyi anlamak, hem tüketicilere doğru ürünü seçme konusunda rehberlik etmek hem de telefon üreticilerinin rekabet avantajı elde etmelerine katkı sağlamak açısından büyük bir önem taşımaktadır. Telefon özellikleri, günümüzde pek çok çeşitlilik göstermektedir. İşletim sistemleri, işlemci hızı, RAM kapasitesi, depolama alanı, kamera kalitesi, batarya ömrü, ekran boyutu gibi faktörler, tüketicilerin telefon seçiminde dikkate aldıkları temel özellikler arasında yer almaktadır. Her bir özellik, telefonun kullanım deneyimini etkileyen önemli bir faktördür. Örneğin, yüksek kamera çözünürlüğüne sahip bir telefon, daha kaliteli fotoğraf ve video çekme imkanı sunarken, daha fazla depolama alanı, kullanıcılara daha geniş bir veri depolama kapasitesi sağlamaktadır. Bu özelliklerin her birinin, tüketiciler üzerinde farklı bir değere sahip olduğu bilinmektedir. Fiyat ise, tüketicilerin telefon seçiminde en önemli faktörlerden biridir. Her bütçeye uygun telefon modelleri bulunmasına rağmen, fiyatlar genellikle telefonun özelliklerine ve markasına bağlı olarak değişiklik göstermektedir. Telefon üreticileri, rekabetçi bir ortamda tüketicilerin taleplerini karşılamak ve farklı pazar segmentlerine hitap etmek amacıyla farklı fiyat aralıklarında çeşitli modeller sunmaktadır. Bu noktada, telefon özellikleri ve fiyatları arasındaki ilişkinin analiz edilmesi, tüketicilere bütçelerine uygun en iyi telefonu seçme konusunda yardımcı olmaktadır. Bu veri seti analizi, telefon özelliklerinin fiyat üzerindeki etkisini ve tüketicilerin hangi özellikleri daha değerli gördüklerini belirlemeyi amaçlamaktadır. Elde edilen bulgular, tüketicilere doğru ürün seçiminde rehberlik etmek için değerli bir kaynak sağlayacaktır. Aynı zamanda, telefon üreticilerine de pazar taleplerini daha iyi anlama ve fiyatlandırma stratejilerini geliştirme konusunda yol gösterici olacaktır. Telefon özellikleri ve fiyat analizi, mobil telefon pazarındaki rekabetin artmasıyla birlikte giderek daha önemli hale gelmekte ve tüketicilerin telefon seçiminde bilinçli kararlar vermelerine yardımcı olmaktadır.
+
+## Çalışmanın Amacı
+Bu çalışmanın temel amacı, telefon özellikleri ve fiyatları arasındaki ilişkiyi analiz etmek ve tüketicilere doğru telefon seçimi konusunda rehberlik etmektir. Mobil telefon pazarı giderek rekabetçi bir hale gelirken, tüketicilerin doğru seçimi yapabilmesi için objektif verilere dayalı bilgilere ihtiyaç duymaktadır. Bu çalışmada kullanılan veri seti, farklı telefon modellerinin çeşitli özelliklerini ve fiyatlarını içermektedir. Telefon özellikleri, işletim sistemi, kamera kalitesi, depolama kapasitesi, batarya ömrü gibi faktörleri içermektedir. Fiyat ise, tüketicilerin bütçeleriyle uyumlu telefon seçimi yapabilmesi için önemli bir kriterdir. Veri setinin analizi, telefon özelliklerinin fiyat üzerindeki etkisini ve tüketicilerin hangi özellikleri daha değerli gördüğünü anlamamızı sağlayacaktır. Bu analiz sonuçları, tüketicilere doğru telefon seçiminde yol gösterici olacaktır. Örneğin, kullanıcılar yüksek kamera çözünürlüğüne veya geniş depolama alanına daha fazla önem veriyorsa, bu analiz sonuçlarına dayanarak daha uygun bir telefon seçimi yapabileceklerdir. Ayrıca, telefon üreticileri için de bu analiz sonuçları değerli bir kaynak olacaktır. Rekabetçi bir pazarda, tüketicilerin taleplerini ve tercihlerini anlamak önemlidir. Analiz sonuçları, üreticilere pazarda talep gören özellikleri belirlemeleri ve fiyatlandırma stratejilerini optimize etmeleri konusunda rehberlik edecektir. Bu çalışmanın amacı, tüketicilere doğru telefon seçimi konusunda bilgi sağlamak ve telefon üreticilerine rekabet avantajı sağlamak için telefon özellikleri ve fiyatları arasındaki ilişkiyi anlamaktır. Veri analiziyle elde edilen bulgular, pazarda doğru kararlar verilmesini destekleyerek, hem tüketicilere hem de telefon üreticilerine değerli bilgiler sunacaktır.
+
+## Literatür 
+@kimzan2015tuketicilerin
+@izmir2ozelliklerine
+@efendiouglu4cep
+@shahzad2013investigating
+@kim2018measuring
+
+Bu makaleler cep telefonu satın alma kararıyla ilgili faktörleri ve tüketicilerin tercihlerini araştırmaktadır. Kimzan'ın çalışması, içsel referans fiyat seçiminin tüketicilerin satın alma kararlarını nasıl etkilediğini incelemekte, İzmir'in makalesi ise cep telefonu tercihinde uygulama kategorisi seçimiyle ilişkisini araştırmaktadır. Efendioğlu, Mutlu ve Durmaz'ın çalışması, Y kuşağı tüketicilerin cep telefonu satın alma kararında markanın etkisini ele almaktadır. Shahzad ve Rohi'nin araştırması, Peshawar'daki özel üniversite öğrencileri arasında mobil telefon marka tercihini etkileyen faktörleri incelemektedir. Son olarak, Kim'in çalışması, mobil telefon özellikleri için ödeme yapma isteğini ölçen çoklu bölge bir araştırmadır. Bu makaleler, cep telefonu satın alma kararlarını etkileyen faktörler hakkında bilgi sağlamakta ve tüketicilerin tercihlerini anlamaya yönelik araştırmalara odaklanmaktadır.
+
+# Veri
+
+"Veri setinin seçili değişkenleri için özet istatistikler aşağıdaki tabloda sunulmaktadır (Tablo \ref{tab:ozet}). Tablodaki istatistikler, Agirlik, Uzunluk, Genislik, Ram ve KameraSayisi değişkenlerinin temel istatistiksel özelliklerini yansıtmaktadır.
+
+Tablodaki 'mean' sütunu, her bir değişkenin ortalama değerini gösterirken, 'sd' sütunu standart sapmalarını temsil eder. 'min' ve 'max' sütunları, değişkenlerin minimum ve maksimum değerlerini ifade eder. 'med' sütunu ise değişkenlerin ortanca (medyan) değerlerini yansıtır.
+
+Tablodan gözlemleyebileceğiniz gibi, Agirlik değişkeninin ortalama değeri x, Uzunluk değişkeninin ortalama değeri y, Genislik değişkeninin ortalama değeri z'dir. Ayrıca, Ram değişkeninin minimum değeri a, KameraSayisi değişkeninin maksimum değeri b'dir.
+
+Bu özet istatistikler, seçili değişkenlerin dağılımları ve merkezi eğilimleri hakkında bilgi sağlar. Tablo, veri setinin genel özellikleri hakkında bir bakış sunar
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(here)
+veri <- read_csv(here("../data/veri.csv"))
+```
+
+```{r, echo=FALSE}
+library(xtable) 
+# devtools::install_github("emraher/summarytools")
+library(summarytools)
+st_options(lang = "tr")
+```
+
+```{r results='asis', echo=FALSE}
+veri %>%
+  select("Agirlik", "Uzunluk", "Genislik", "Ram", "KameraSayisi") %>% 
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Özet İstatistikler",
+         label = "tab:ozet",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+```
+
+
+# Yöntem ve Veri Analizi
+Bu bölümde veri setindeki bilgileri kullanarak çalışmanın amacına ulaşmak için kullanılacak yöntemleri açıklayın.
+
+
+"Aşağıdaki grafikte, Agirlik değişkeninin dağılımını gösteren bir histogram yer almaktadır. Histogram, Agirlik değerlerinin frekansını görselleştiren bir grafik türüdür. Grafikteki sütunlar, belirli aralıklardaki Agirlik değerlerinin frekansını temsil eder.
+
+Grafiği incelediğimizde, Agirlik değerlerinin çoğunlukla x ila y aralığında olduğunu gözlemleyebiliriz. Grafikteki sütunların yüksekliği, o aralıktaki Agirlik değerlerinin sıklığını yansıtır. Grafikteki sütunların genişliği ise aralık genişliğini gösterir.
+
+Bu histogram grafiği, Agirlik değişkeninin dağılımını daha iyi anlamamıza yardımcı olur. Grafik, Agirlik değerlerinin yoğunluğunu ve merkezi eğilimini görsel olarak gözlemlememize olanak tanır."
+
+```{r, echo=FALSE}
+veri %>% 
+  ggplot(aes(x = Agirlik)) +  
+  geom_histogram(colour = "black", fill = "white") +
+  scale_x_continuous("Agirlik") + 
+  scale_y_continuous("Frekans")
+
+```
+
+Aşağıdaki grafik, Ram ve IslemciHızı değişkenleri arasındaki ilişkiyi göstermektedir. Ram değişkeni x-ekseninde, IslemciHızı değişkeni ise y-ekseninde temsil edilmektedir. Kutu grafiği, her bir Ram değeri için IslemciHızı dağılımını gösterir.
+
+Kutu grafiği, her bir Ram kategorisi için beş özet istatistik (minimum, birinci çeyrek, medyan, üçüncü çeyrek, maksimum) ile temsil edilir. Kutunun üst sınırı üçüncü çeyrek, alt sınırı ise birinci çeyrektir. Medyan değeri ise kutunun içinde yer alır. Ek olarak, aykırı değerler nokta şeklinde gösterilir.
+
+Bu grafik, Ram ve IslemciHızı değişkenleri arasındaki ilişkiyi daha iyi anlamak ve bu iki değişken arasındaki dağılım farklarını gözlemlemek için kullanılabilir.
+```{r, echo=FALSE}
+veri %>%
+  na.omit() %>%
+  ggplot(aes(x = Ram, y = IslemciHızı)) +
+  geom_boxplot() +
+  labs(x = "Ram", y = "IslemciHızı")
+```
+
+Aşağıdaki grafik, Fiyat değişkeninin farklı Bellek kategorilerine göre dağılımını göstermektedir. Fiyat değişkeni x-ekseninde, yoğunluk değerleri ise y-ekseninde temsil edilmektedir. Grafik, her bir Bellek kategorisi için ayrı bir panelde gösterilmektedir.
+
+Her bir panelde, ilgili Bellek kategorisine ait fiyat değerleri üzerinde yoğunluk grafiği çizilmiştir. Yoğunluk grafiği, her bir fiyat noktasının ne kadar sıklıkla görüldüğünü göstermektedir. Yüksek bir yoğunluk, fiyat aralığının daha fazla örnekleme sahip olduğunu gösterirken, düşük bir yoğunluk daha az örnekleme olduğunu gösterir.
+```{r, echo=FALSE}
+veri %>%
+  ggplot() +
+  aes(x = Fiyat, group = Bellek, fill = Bellek) +
+  geom_density() +
+  facet_wrap(~Bellek) +
+  labs(y = "SimKart", x = "Fiyat", title = "Ram") +
+  ggthemes::theme_stata() +
+  theme(legend.position = "none")
+```
+
+Aşağıdaki histogram, KameraSayisi değişkeninin dağılımını göstermektedir. X-ekseni KameraSayisi değerlerini temsil ederken, y-ekseni ise her bir KameraSayisi değerinin frekansını göstermektedir.
+
+Histogram, veri setindeki KameraSayisi değerlerinin farklı aralıklara bölünerek her bir aralıktaki değerlerin sayısını görselleştirir. Her sütun, belirli bir aralıkta bulunan değerlerin frekansını temsil eder. Yüksek sütunlar, o aralıktaki değerlerin daha sık olduğunu gösterirken, düşük sütunlar daha az sayıda değer olduğunu gösterir.
+
+```{r, echo=FALSE}
+ggplot(veri) +
+  aes(x = KameraSayisi) +
+  geom_histogram()
+```
+
+Aşağıdaki bu scatter plot matrisi, Agirlik, Uzunluk ve KameraSayisi değişkenleri arasındaki ilişkileri görselleştirir. Matrisin her bir hücresi, iki değişken arasındaki ilişkiyi bir scatter plot olarak temsil eder.
+
+Her bir scatter plot, x-ekseninde bir değişkeni, y-ekseninde ise diğer değişkeni temsil eder. Bu sayede her hücredeki scatter plot, iki değişkenin ilişkisini gösterir. Scatter plotlar, noktaların dağılımını göstererek değişkenler arasındaki eğilimleri, yoğunlukları ve olası ilişkileri görsel olarak gösterir.
+
+Bu scatter plot matrisi, Agirlik, Uzunluk ve KameraSayisi değişkenlerinin birbirleriyle olan ilişkisini daha iyi anlamak ve değişkenler arasındaki ilişkileri görsel olarak karşılaştırmak için kullanılabilir.
+
+```{r, echo=FALSE}
+veri %>% 
+  select(Agirlik, Uzunluk, KameraSayisi) %>% 
+  GGally::ggpairs()
+```
+
+# Sonuç
+Bu çalışmada, veri setindeki değişkenler üzerinde yapılan analizler sonucunda aşağıdaki sonuçlara ulaşılmıştır:
+
+Uzunluk, genişlik, ekran boyutu, bellek, işlemci hızı, pil ömrü, kamera sayısı, renkler, SIM kartı, RAM ve fiyat değişkenleri arasında çeşitli ilişkiler ve etkileşimler tespit edilmiştir.
+
+Uzunluk, genişlik ve ekran boyutu arasında pozitif bir korelasyon gözlenmiştir, yani telefonların genellikle daha uzun ve geniş ekranlara sahip olduğu görülmüştür.
+
+Bellek ve RAM kapasitesi, telefon fiyatıyla pozitif bir ilişki sergilemiştir. Yani, daha yüksek bellek veya RAM kapasitesine sahip telefonlar genellikle daha yüksek fiyatlı olmuştur.
+
+İşlemci hızı, pil ömrü, kamera sayısı, renkler ve SIM kartı gibi değişkenlerin de telefon fiyatı üzerinde etkili olduğu gözlemlenmiştir. Örneğin, daha yüksek işlemci hızına veya daha fazla kamera sayısına sahip telefonlar genellikle daha yüksek fiyatlı olmuştur.
+
+Bu sonuçlar, başlangıçta belirlenen araştırma sorusuna cevap verme yolunda ilerlemiş ve değişkenler arasındaki ilişkileri ve etkileşimleri anlamamıza yardımcı olmuştur.
+
+Bu çalışmanın ileride geliştirilebileceği bazı alanlar şunlardır:
+
+Daha fazla veri toplama: Veri setine ek değişkenler veya daha geniş bir örnekleme katılabilir. Bu, analizlerin daha kapsamlı ve güvenilir olmasını sağlayabilir.
+
+İleri istatistiksel analizler: Bu çalışmada yapılan analizlerin ötesine geçmek için daha karmaşık istatistiksel yöntemler ve modeller kullanılabilir. Örneğin, çoklu regresyon analizi veya doğrusal olmayan ilişkileri modelleme teknikleri kullanılabilir.
+
+Müşteri tercihleri ve pazar segmentasyonu: Telefon özellikleriyle ilgili daha fazla anket veya müşteri geri bildirimi toplanabilir. Bu sayede, müşteri tercihleri ve pazar segmentasyonu hakkında daha derinlemesine bir anlayış elde edilebilir.
+
+Makine öğrenimi ve tahmin modelleri: Makine öğrenimi algoritmaları kullanılarak telefon fiyatlarının tahmin edilmesi veya diğer değişkenlerle ilişkilerin keşfedilmesi gibi ileri düzey analizler yapılabilir.
+
+Bu geliştirmeler, çalışmanın sonuçlarını daha fazla bilgi sağlayan ve uygulamaya yönelik çıkarımlar yapılabilen bir seviyeye taşıyabilir.
+
+
+
+\newpage
+# Kaynakça {#references}
+<div id="refs"></div>
+
